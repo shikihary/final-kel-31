@@ -14,7 +14,7 @@ class CreateAnswerVotesTable extends Migration
     public function up()
     {
         Schema::create('answer_votes', function (Blueprint $table) {
-            $table->tinyInteger('value');
+            $table->tinyInteger('value')->default(0);
         });
     }
 
