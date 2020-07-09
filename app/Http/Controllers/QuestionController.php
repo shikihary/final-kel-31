@@ -63,7 +63,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $questions = Question::find($id);
+        return view('question.show', compact('questions'));
     }
 
     /**
@@ -74,7 +75,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions = Question::find($id);
+        return view('question.edit', compact('questions'));
     }
 
     /**
@@ -86,7 +88,12 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::find($id);
+            $question->update([
+                'judul' => $request->judul,
+                'isi' => $request->isi,
+                'tag' => $request->tag
+            ]);
     }
 
     /**
@@ -97,6 +104,8 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Answer::where('question_id', $id)->delete();
+        Question::find($id)->delete();
+        return redirect()->route('question.index');
     }
 }
