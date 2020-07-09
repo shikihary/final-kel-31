@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function() {
+    return view('test');
+});
+
+Route::resource('questions', 'QuestionController');
+
+Route::resource('answers', 'AnswerController');
