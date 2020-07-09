@@ -19,8 +19,8 @@ class CreateQuestionsTable extends Migration
             $table->text('isi');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('upvotes')->nullable();
-            $table->integer('downvotes')->nullable();
+            $table->integer('upvotes')->default(0);
+            $table->integer('downvotes')->default(0);
         });
     }
 
