@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'QuestionController@index');
+Route::get('/users', 'UserController@index');
 
 Route::get('/test', function() {
     return view('test');
