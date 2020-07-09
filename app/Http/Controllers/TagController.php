@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Question;
-use App\Tag;
 
-class QuestionController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::all();
-        return view('question.index', compact('questions'));
+        //
     }
 
     /**
@@ -26,7 +23,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('question.form');
+        //
     }
 
     /**
@@ -37,24 +34,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $new_question= Question::create([
-            "judul" => $request["judul"],
-            "isi" => $request["isi"],
-        ]);
-
-        $tagArr = explode(',', $request->tags);
-        $tagsMulti  = [];
-        foreach($tagArr as $strTag){
-            $tagArrAssc["tag_name"] = $strTag;
-            $tagsMulti[] = $tagArrAssc;
-        }
-
-        // Create Tags baru
-        foreach($tagsMulti as $tagCheck){
-            $tag = Tag::firstOrCreate($tagCheck);
-            $new_question->tags()->attach($tag->id);
-        }
-        return redirect('/questions');
+        //
     }
 
     /**
@@ -65,8 +45,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = Question::find($id);
-    return view('question.show', compact('question'));
+        //
     }
 
     /**
@@ -77,8 +56,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = Question::find($id);
-        return view('question.edit', compact('question'));
+        //
     }
 
     /**
@@ -90,12 +68,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::find($id);
-        $question->judul = $request->judul;
-        $question->isi = $request->isi;
-        $question->save();
-        
-        return redirect('/questions');
+        //
     }
 
     /**
@@ -106,8 +79,6 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::find($id);
-        $question->delete();
-        return redirect('/questions');
+        //
     }
 }

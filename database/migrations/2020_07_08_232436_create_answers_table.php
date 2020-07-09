@@ -18,9 +18,9 @@ class CreateAnswersTable extends Migration
             $table->text('isi');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('upvotes');
-            $table->integer('downvotes');
-            $table->tinyInteger('is_best_answer');
+            $table->integer('upvotes')->nullable();
+            $table->integer('downvotes')->nullable();
+            $table->tinyInteger('is_best_answer')->nullable();
         });
     }
 

@@ -17,11 +17,10 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('judul');
             $table->text('isi');
-            $table->string('tag');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('upvotes');
-            $table->integer('downvotes');
+            $table->integer('upvotes')->nullable();
+            $table->integer('downvotes')->nullable();
         });
     }
 
