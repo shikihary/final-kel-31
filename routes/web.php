@@ -22,3 +22,7 @@ Route::get('/test', function() {
 Route::resource('questions', 'QuestionController');
 
 Route::resource('answers', 'AnswerController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
