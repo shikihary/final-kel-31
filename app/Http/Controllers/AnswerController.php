@@ -13,7 +13,9 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        $question = Question::find($id);
+        $answers = Answer::where('question_id', $id)->get();
+        return view('answer.index', compact('answers', 'question'));
     }
 
     /**
@@ -23,7 +25,8 @@ class AnswerController extends Controller
      */
     public function create()
     {
-        //
+        $question = Question::find($id);
+        return view('answer.create', compact('question'));
     }
 
     /**
