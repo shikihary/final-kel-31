@@ -20,8 +20,11 @@ Route::get('/test', function() {
 
 Route::resource('questions', 'QuestionController');
 
+Route::post('/answers/{question_id}', 'AnswerController@store');
+
 Route::resource('answers', 'AnswerController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

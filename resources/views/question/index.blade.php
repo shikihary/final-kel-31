@@ -24,6 +24,7 @@
             <td> {{ $question->isi }} </td>
             <td> {{ $question->created_at }} </td>
             <td>
+            <a href="/answers/{{$question->id}}" class="btn btn-sm btn-info">Jawaban</a>
               <a href="/questions/{{$question->id}}" class="btn btn-sm btn-info">show</a>
               <a href="/questions/{{$question->id}}/edit" class="btn btn-sm btn-default">edit</a>
               <form action="/questions/{{$question->id}}" method="post" style="display: inline">

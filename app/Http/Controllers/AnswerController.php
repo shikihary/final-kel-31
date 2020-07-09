@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Question;
@@ -43,9 +44,17 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$question_id)
     {
-        //
+        $data = $request->all();
+        unset($data["_token"]);
+        $new_answer= Answer::create([
+            "isi" => $request["isi"],
+            "question_id" => $question_id
+        ]);
+        if($new_answer){
+            return redirect('answers/'.$question_id);
+        }
     }
 
     /**
@@ -54,9 +63,12 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($question_id)
     {
-        //
+        $answer = DB::table('answers')
+        ->where('question_id',$question_id)
+        ->get(); 
+        return view('answer.index', compact('answer','question_id'));
     }
 
     /**
