@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Question;
 use App\Answer;
 
 class AnswerController extends Controller
@@ -12,7 +13,7 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         $question = Question::find($id);
         $answers = Answer::where('question_id', $id)->get();
@@ -24,7 +25,7 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $question = Question::find($id);
         return view('answer.create', compact('question'));
