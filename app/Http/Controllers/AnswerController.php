@@ -8,6 +8,12 @@ use App\Answer;
 
 class AnswerController extends Controller
 {
+    //construct: authentication
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
