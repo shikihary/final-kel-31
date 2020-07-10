@@ -14,6 +14,7 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="isi" rows="3" placeholder="Input Jawaban di sini"></textarea>
                     -->
                     <textarea name="isi" class="form-control my-editor">{!! old('isi', $isi ?? '') !!}</textarea>
+                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                     <input class="btn btn-primary mt-2" type="submit" value="Post Komentar">
                 </form>
             </div>

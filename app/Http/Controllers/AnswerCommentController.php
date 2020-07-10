@@ -22,6 +22,7 @@ class AnswerCommentController extends Controller
         unset($data["_token"]);
         $new_answerComment= Answer_comment::create([
             "isi" => $request["isi"],
+            "user_id" => $request['user_id'],
             "answer_id" => $answer_id
         ]);
         if($new_answerComment){

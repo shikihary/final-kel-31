@@ -22,6 +22,7 @@ class QuestionCommentController extends Controller
         unset($data["_token"]);
         $new_questionComment= Question_comment::create([
             "isi" => $request["isi"],
+            "user_id" => $request['user_id'],
             "question_id" => $question_id
         ]);
         if($new_questionComment){
