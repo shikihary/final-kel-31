@@ -10,7 +10,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form role="form" action="/questions" method="POST">
+      <form role="form" action="{{ url('/questions/'.Auth::user()->id.'/store') }}" method="POST">
         @csrf
         <div class="card-body">
           <div class="form-group">

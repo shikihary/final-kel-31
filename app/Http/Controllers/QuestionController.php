@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Answer;
 use App\Tag;
+use App\User;
 
 class QuestionController extends Controller
 {
@@ -42,11 +43,12 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         $new_question= Question::create([
             "judul" => $request["judul"],
             "isi" => $request["isi"],
+            "user_id" => $id,
         ]);
 
         dd($new_question);
@@ -131,5 +133,13 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->delete();
         return redirect('/questions');
+    }
+
+    public function userquestion($user_id)
+    {
+        $questions = Question::where('user_id', $user_id)->get();
+        dd($questions);
+        $user = User::find($user_id);
+        return view('question.userquestion', compact('questions', 'user'));
     }
 }
