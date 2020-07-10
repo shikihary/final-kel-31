@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use App\Answer;
 use App\Tag;
 
 class QuestionController extends Controller
@@ -72,7 +73,8 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = Question::find($id);
-        return view('question.show', compact('question'));
+        $answers = Answer::where('question_id', $id)->get();
+        return view('question.show', compact('answers', 'question'));
     }
 
     /**
