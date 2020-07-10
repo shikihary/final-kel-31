@@ -64,6 +64,18 @@ class QuestionController extends Controller
         return redirect('/questions');
     }
 
+    public function answerstore(Request $request, $question_id)
+    {
+        $data = $request->all();
+        unset($data["_token"]);
+        $new_answer= Answer::create([
+            "isi" => $request["isi"],
+            "question_id" => $question_id
+        ]);
+        if($new_answer){
+            return redirect('questions/'.$question_id);
+        }
+    }
     /**
      * Display the specified resource.
      *

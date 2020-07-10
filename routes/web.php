@@ -22,6 +22,8 @@ Route::resource('questions', 'QuestionController');
 
 Route::post('/answers/{question_id}', 'AnswerController@store');
 
+Route::post('/questions/{question_id}', 'QuestionController@answerstore');
+
 Route::resource('answers', 'AnswerController');
 
 Auth::routes();

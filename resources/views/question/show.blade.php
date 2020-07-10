@@ -42,7 +42,7 @@
                 <form action="/questions/{{$question->id}}" method="POST">
                     @csrf
                     <label for="exampleFormControlTextarea1">Jawab: </label>
-                    <input type="hidden" id="$question_id" name="$question->id" value="">
+                    <input type="hidden" id="$question_id" name="$question_id" value="">
                     <!-- Text Area Lama
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="isi" rows="3" placeholder="Input Jawaban di sini"></textarea>
                     -->
