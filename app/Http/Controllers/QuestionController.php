@@ -74,7 +74,8 @@ class QuestionController extends Controller
         unset($data["_token"]);
         $new_answer= Answer::create([
             "isi" => $request["isi"],
-            "question_id" => $question_id
+            "question_id" => $question_id,
+            "user_id" => $request['user_id']
         ]);
         if($new_answer){
             return redirect('questions/'.$question_id);
@@ -138,7 +139,7 @@ class QuestionController extends Controller
     public function userquestion($user_id)
     {
         $questions = Question::where('user_id', $user_id)->get();
-        dd($questions);
+        //dd($questions);
         $user = User::find($user_id);
         return view('question.userquestion', compact('questions', 'user'));
     }
