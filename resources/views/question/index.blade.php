@@ -31,7 +31,7 @@
             <td style="text-align:center"> <p class="text-success">{{ $question->upvotes - $question->downvotes }}<br>votes </p>
             </td>
             <td> <a href="/questions/{{$question->id}}" class="text-decoration-none"><h4>{{ $question->judul }}</h4></a>
-                 <p> {{ $question->isi }}<br> </p>
+                 <p> {!! $question->isi !!}<br> </p>
                  <p class="text-secondary"> {{ date_format($question->created_at, 'd-m-Y') }}</p>
             </td>
             
