@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Question;
 use App\Answer;
 use App\Tag;
@@ -51,7 +52,7 @@ class QuestionController extends Controller
             "user_id" => $id,
         ]);
 
-        dd($new_question);
+        //dd($new_question);
 
         $tagArr = explode(',', $request->tags);
         $tagsMulti  = [];
@@ -59,11 +60,16 @@ class QuestionController extends Controller
             $tagArrAssc["tag_name"] = $strTag;
             $tagsMulti[] = $tagArrAssc;
         }
-
+        //dd($tagsMulti);
         // Create Tags baru
         foreach($tagsMulti as $tagCheck){
             $tag = Tag::firstOrCreate($tagCheck);
-            $new_question->tags()->attach($tag->id);
+            $question_tag = DB::table('Question_tag')->insert([
+                "tag_id" => $tag->id,
+                "question_id" => $new_question->id,
+            ]);
+
+            //$new_question->tags()->attach($tag->id);
         }
         return redirect('/questions');
     }
