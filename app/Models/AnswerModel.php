@@ -3,7 +3,7 @@
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
 
-class PertanyaanModel{
+class AnswerModel{
     public static function upvotes($id){
   
     }

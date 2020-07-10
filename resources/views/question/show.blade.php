@@ -1,7 +1,23 @@
 @extends('adminlte.master')
 @push('script-head')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+    <!--script sementara buat vote-->
+    <script type="text/javascript">
+    var votes = 0;
+    function upvote(){
+        votes++;
+        document.getElementById('display').innerHTML = votes;
+    }
+
+    function downvote(){
+        votes--;
+        document.getElementById('display').innerHTML = votes;
+    }
+    </script>
+    <!--script sampe sini-->
 @endpush
+
 @section('content')
     <div class="ml-3 mt-3">
       <h1> {{ $question->judul }} </h1>
@@ -13,10 +29,13 @@
       @endforeach
     </div>
     <div class="content-wrapper d-inline">
-      <button type="button" class="btn btn-success">↑</button>
-      <button type="button" class="btn btn-danger">↓</button>
-      votes:
+      <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
+      <button onclick="upvote()" type="button" class="btn btn-success">↑</button>
+      <button onclick="downvote()" type="button" class="btn btn-danger">↓</button>
+      votes: <span id="display"><script type="text/javascript">document.write(votes);</script></span>
+      <!--harusnya display votes pake ini:
       {{ $question->upvotes - $question->downvotes }}<br>
+      -->
     </div>
 
     <div class="ml-3 mt-3">
