@@ -49,6 +49,8 @@ class QuestionController extends Controller
             "isi" => $request["isi"],
         ]);
 
+        dd($new_question);
+
         $tagArr = explode(',', $request->tags);
         $tagsMulti  = [];
         foreach($tagArr as $strTag){

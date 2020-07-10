@@ -57,9 +57,19 @@ class AnswerController extends Controller
         }
     }
 
-    public function bestanswer($question_id){
-        $answers = Answer::where('question_id', $question_id)->get();
-        dd($answers);
+    public function bestanswer($id, $question_id){
+        $answer = Answer::find($id);
+        $answer->is_best_answer = 1;
+        $answer->save();
+        $allanswers = Answer::where('question_id', $question_id)
+                            ->where('id', '!=' , $id)
+                            ->get();
+
+        foreach ($allanswers as $key => $value) {
+            $value->is_best_answer = 0;
+            $value->save();
+        }
+        return redirect('questions/'.$question_id);
     }
 
     /**

@@ -44,16 +44,17 @@
     <!-- foreach disini -->
     @foreach($answers as $key => $data)
       @if($data->is_best_answer == 1)
-        <div class="ml-3 mt-3 bg-success">
+      <div class="bg-success">
       @else
-        <div class="ml-3 mt-3">
+      <div>
       @endif
+        <div class="ml-3 mt-3">
           <p class="text-secondary"> {{ date_format($data->created_at, 'd-m-Y') }} </p>
           <p> {!! $data->isi !!} </p>
         </div>
         <div class="content-wrapper d-inline">
           <a href="/answerComments/{{$data->id}}" class="btn btn-sm btn-info float-left ml-3">Komentar</a>
-          <form class="content-wrapper d-inline" role="form" action="/bestanswer/{{$data->question_id}}" method="POST">
+          <form class="content-wrapper d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary">Best Answer</button>
           </form>
@@ -63,6 +64,7 @@
           {{ $data->upvotes - $data->downvotes }}<br>
           ________________________________________________________<br>
         </div>
+      </div>
 
     @endforeach
 
