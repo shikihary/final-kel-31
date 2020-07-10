@@ -43,24 +43,24 @@
     </div>
     <!-- foreach disini -->
     @foreach($answers as $key => $data)
-        <div class="ml-3 mt-3">
-          <p class="text-secondary"> {{ date_format($data->created_at, 'd-m-Y') }} </p>
-          <p> {!! $data->isi !!} </p>
+        <div class="mx-3 card">
+          <div class="card-header text-secondary">{{ date_format($data->created_at, 'd-m-Y') }}</div>
+          <div class="card-body">
+            <p> {!! $data->isi !!} </p>
+          </div>
         </div>
-        <div class="content-wrapper d-inline">
-          <a href="/answerComments/{{$data->id}}" class="btn btn-sm btn-info float-left ml-3">Komentar</a>
+        <div class="card-footer d-inline bg-light">
+          <a href="/answerComments/{{$data->id}}" class="badge badge-info float-left ml-3">Komentar</a>
           <button type="button" class="btn btn-success float-right mx-1">↑</button>
           <button type="button" class="btn btn-danger float-right mx-1">↓</button>
-            <form class="content-wrapper d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
+            <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary float-right mx-1">Best Answer</button>
           </form>
           @if($data->is_best_answer == 1)
               <button type="button" class= "btn btn-outline-success float-right mx-1">Verified</button>
             @endif
-          votes:
-          {{ $data->upvotes - $data->downvotes }}<br>
-          ________________________________________________________<br>
+            <p class="d-inline">votes: {{ $data->upvotes - $data->downvotes }}<p>
         </div>
 
     @endforeach
