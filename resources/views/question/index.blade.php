@@ -32,7 +32,8 @@
             </td>
             <td> <a href="/questions/{{$question->id}}" class="text-decoration-none"><h4>{{ $question->judul }}</h4></a>
                  <p> {!! $question->isi !!}<br> </p>
-                 <p class="text-secondary"> {{ date_format($question->created_at, 'd-m-Y') }}</p>
+                 <p class="text-secondary">Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }}</p>
+                 <p class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</p>
             </td>
             
             <td>
