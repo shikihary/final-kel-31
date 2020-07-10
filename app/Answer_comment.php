@@ -8,4 +8,5 @@ class Answer_comment extends Model
 {
     protected $table = 'answer_comments';
     protected $guarded = [];
+    const UPDATED_AT = null;
 }

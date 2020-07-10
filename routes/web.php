@@ -28,6 +28,10 @@ Route::get('/questionComments/{question_id}','QuestionCommentController@show');
 
 Route::post('/questionComments/{question_id}', 'QuestionCommentController@store');
 
+Route::get('/answerComments/{answer_id}','AnswerCommentController@show');
+
+Route::post('/answerComments/{answer_id}', 'AnswerCommentController@store');
+
 Route::resource('answers', 'AnswerController');
 
 Auth::routes();

@@ -3,56 +3,34 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 @endpush
 @section('content')
-    <div class="ml-3 mt-3">
-      <h1> {{ $question->judul }} </h1>
-      <p class="text-secondary"> Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }} </p>
-      <p> {!! $question->isi !!} </p>
-      @foreach($question->tags as $tag) 
-        <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
-      @endforeach
-    </div>
-    <div class="content-wrapper d-inline">
-      <button type="button" class="btn btn-success">↑</button>
-      <button type="button" class="btn btn-danger">↓</button>
-      votes:
-      {{ $question->upvotes - $question->downvotes }}<br>
-    </div>
-
-    <div class="ml-3 mt-3">
-      <h3> Answers </h3> 
-    </div>
-    <!-- foreach disini -->
-    @foreach($answers as $key => $data)
-    <div class="ml-3 mt-3">
-      <p class="text-secondary"> {{ date_format($data->created_at, 'd-m-Y') }} </p>
-      <p> {!! $data->isi !!} </p>
-      
-    </div>
-    <div class="content-wrapper d-inline">
-      <a href="/answerComments/{{$data->id}}" class="btn btn-sm btn-info float-left ml-3">Komentar</a>
-      <button type="button" class="btn btn-success">↑</button>
-      <button type="button" class="btn btn-danger">↓</button>
-      votes:
-      {{ $data->upvotes - $data->downvotes }}<br>
-      ________________________________________________________<br>
-    </div>
-    @endforeach
-
     <table class="table">
+        <thead>
             <div class = "ml-3 pt-2 mb-2">
-                <form action="/questions/{{$question->id}}" method="POST">
+                <form action="/answerComments/{{$answer_id}}" method="POST">
                     @csrf
                     <label for="exampleFormControlTextarea1">Jawab: </label>
-                    <input type="hidden" id="$question_id" name="$question_id" value="">
+                    <input type="hidden" id="$answer_id" name="$answer->id" value="{{$answer_id}}">
                     <!-- Text Area Lama
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="isi" rows="3" placeholder="Input Jawaban di sini"></textarea>
                     -->
                     <textarea name="isi" class="form-control my-editor">{!! old('isi', $isi ?? '') !!}</textarea>
-                    <input class="btn btn-primary mt-2" type="submit" value="Post Jawaban">
+                    <input class="btn btn-primary mt-2" type="submit" value="Post Komentar">
                 </form>
             </div>
+        <tr>
+            <th>No</th>
+            <th>Isi</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($answerComment as $key => $data)
+            <tr>
+                <th>{{$key+1}}</th>
+                <th>{!!$data->isi!!}</th>
+            </tr>
+        @endforeach
+        </tbody>
     </table>
-
 @endsection
 
 @push('scripts')
