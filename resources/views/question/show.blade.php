@@ -24,19 +24,27 @@
     </div>
     <!-- foreach disini -->
     @foreach($answers as $key => $data)
-    <div class="ml-3 mt-3">
-      <p class="text-secondary"> {{ date_format($data->created_at, 'd-m-Y') }} </p>
-      <p> {!! $data->isi !!} </p>
-      
-    </div>
-    <div class="content-wrapper d-inline">
-      <a href="/answerComments/{{$data->id}}" class="btn btn-sm btn-info float-left ml-3">Komentar</a>
-      <button type="button" class="btn btn-success">↑</button>
-      <button type="button" class="btn btn-danger">↓</button>
-      votes:
-      {{ $data->upvotes - $data->downvotes }}<br>
-      ________________________________________________________<br>
-    </div>
+      @if($data->is_best_answer == 1)
+        <div class="ml-3 mt-3 bg-success">
+      @else
+        <div class="ml-3 mt-3">
+      @endif
+          <p class="text-secondary"> {{ date_format($data->created_at, 'd-m-Y') }} </p>
+          <p> {!! $data->isi !!} </p>
+        </div>
+        <div class="content-wrapper d-inline">
+          <a href="/answerComments/{{$data->id}}" class="btn btn-sm btn-info float-left ml-3">Komentar</a>
+          <form class="content-wrapper d-inline" role="form" action="/bestanswer/{{$data->question_id}}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary">Best Answer</button>
+          </form>
+          <button type="button" class="btn btn-success">↑</button>
+          <button type="button" class="btn btn-danger">↓</button>
+          votes:
+          {{ $data->upvotes - $data->downvotes }}<br>
+          ________________________________________________________<br>
+        </div>
+
     @endforeach
 
     <table class="table">

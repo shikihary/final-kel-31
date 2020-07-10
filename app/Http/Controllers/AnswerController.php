@@ -57,6 +57,11 @@ class AnswerController extends Controller
         }
     }
 
+    public function bestanswer($question_id){
+        $answers = Answer::where('question_id', $question_id)->get();
+        dd($answers);
+    }
+
     /**
      * Display the specified resource.
      *
