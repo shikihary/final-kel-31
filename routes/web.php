@@ -24,6 +24,10 @@ Route::post('/answers/{question_id}', 'AnswerController@store');
 
 Route::post('/questions/{question_id}', 'QuestionController@answerstore');
 
+Route::get('/questionComments/{question_id}','QuestionCommentController@show');
+
+Route::post('/questionComments/{question_id}', 'QuestionCommentController@store');
+
 Route::resource('answers', 'AnswerController');
 
 Auth::routes();

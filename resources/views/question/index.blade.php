@@ -36,8 +36,8 @@
             </td>
             
             <td>
-            <a href="/answers/{{$question->id}}" class="btn btn-sm btn-info">Jawab</a>
-              <a href="/questions/{{$question->id}}/edit" class="btn btn-sm btn-default">edit</a>
+            <a href="/questionComments/{{$question->id}}" class="btn btn-sm btn-info">Komentar</a>
+              <a href="/questions/{{$question->id}}/edit" class="btn btn-sm btn-default">Edit</a>
               <form action="/questions/{{$question->id}}" method="post" style="display: inline">
                 @csrf
                 @method('DELETE')
