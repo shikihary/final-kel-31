@@ -28,22 +28,35 @@
             <td> {{ $question->isi }} </td>
             <td> {{ $question->created_at }} </td>
             <td> -->
-            <td style="text-align:center"> <p class="text-success">{{ $question->upvotes - $question->downvotes }}<br>votes </p>
+
+            <td style="text-align:center">
+                <p class="text-success">{{ $question->upvotes - $question->downvotes }}<br>votes</p>
             </td>
-            <td> <a href="/questions/{{$question->id}}" class="text-decoration-none"><h4>{{ $question->judul }}</h4></a>
-                 <p> {!! $question->isi !!}<br> </p>
-                 <p class="text-secondary">Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }}</p>
-                 <p class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</p>
+            <td colspan="2"> <a href="/questions/{{$question->id}}" class="text-decoration-none"><h4>{{ $question->judul }}</h4></a>
+                 <p> {!! $question->isi !!}<br> </p>             
             </td>
-            
+            </tr>
+            <td></td>
+            <td>
+                 <span class="text-secondary">Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }}</span>
+                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 <span class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</span>
+            </td>
+            <div class="col-6 offset-4" id="test">
+
             <td>
             <a href="/questionComments/{{$question->id}}" class="btn btn-sm btn-info">Komentar</a>
-              <a href="/questions/{{$question->id}}/edit" class="btn btn-sm btn-default">Edit</a>
-              <form action="/questions/{{$question->id}}" method="post" style="display: inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
-              </form>
+                <div class="dropdown btn">
+                  <a data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-1x waves-effect"></i></a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/questions/{{$question->id}}/edit">Edit</a>
+                    <form action="/questions/{{$question->id}}" method="post" style="display: inline">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="dropdown-item" >Hapus</button>
+                    </form>
+                  </div>
+                </div>
             </td>
           </tr>
         @endforeach
