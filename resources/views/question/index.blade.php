@@ -36,12 +36,12 @@
                  <p> {!! $question->isi !!}<br> </p>             
             </td>
             </tr>
-            <td></td>
-            <td>
-                 <span class="text-secondary">Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }}</span>
-                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                 <span class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</span>
-            </td>
+              <td></td>
+              <td>
+                  <span class="text-secondary">Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }}</span>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  <span class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</span>
+              </td>
             <div class="col-6 offset-4" id="test">
 
             <td>
