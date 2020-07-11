@@ -30,7 +30,8 @@
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
       @endforeach
-      <h5 class="text-secondary"><br>votes: <span id="display"><script type="text/javascript">document.write(votes);</script></h5>
+      <br>
+      <h5 class="d-inline text-secondary float-left mt-1">votes: {{ $question->upvotes - $question->downvotes }}</h5>
     </div>
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
@@ -38,7 +39,7 @@
       <button onclick="upvote()" type="button" class="btn btn-success float-right mx-1">↑</button>
     </div>
 
-    <div class="ml-3 mt-3">
+    <div class="ml-3 mt-4">
       <h3> Answers </h3> 
     </div>
     <!-- foreach disini -->
@@ -50,17 +51,17 @@
           </div>
         </div>
         <div class="card-footer d-inline bg-light">
-          <a href="/answerComments/{{$data->id}}" class="badge badge-info float-left ml-3">Komentar</a>
           <button type="button" class="btn btn-danger float-right mx-1">↓</button>
-          <button type="button" class="btn btn-success float-right mx-1">↑</button>          
+          <button type="button" class="btn btn-success float-right mx-1">↑</button>
             <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-primary float-right mx-1">Best Answer</button>
+            <button type="submit" class="btn btn-primary-outline bg-transparent text-primary float-right mx-1">Best answer!</button>
           </form>
+          <a href="/answerComments/{{$data->id}}" class="btn btn-primary-outline bg-transparent float-right ml-3">🗨</a>
+          <span class="d-inline text-secondary floeat-left ml-3">votes: {{ $data->upvotes - $data->downvotes }}</span>
           @if($data->is_best_answer == 1)
-              <button type="button" class= "btn btn-outline-success float-right mx-1">Verified</button>
-            @endif
-            <p class="d-inline text-secondary">votes: {{ $data->upvotes - $data->downvotes }}<p>
+            <button type="button" class= "btn btn-primary-outline bg-transparent text-success float-right ml-3"><h5>✓</h5></button>
+          @endif
         </div>
 
     @endforeach
