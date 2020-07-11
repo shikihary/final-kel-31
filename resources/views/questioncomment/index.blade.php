@@ -8,7 +8,7 @@
             <div class = "ml-3 pt-2 mb-2">
                 <form action="/questionComments/{{$question_id}}" method="POST">
                     @csrf
-                    <label for="exampleFormControlTextarea1">Jawab: </label>
+                    <label for="exampleFormControlTextarea1">Komentar: </label>
                     <input type="hidden" id="$question_id" name="$question->id" value="{{$question_id}}">
                     <!-- Text Area Lama
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="isi" rows="3" placeholder="Input Jawaban di sini"></textarea>

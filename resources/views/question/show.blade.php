@@ -27,15 +27,12 @@
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
       @endforeach
+      <h5><br>votes: <span id="display"><script type="text/javascript">document.write(votes);</script></h5>
     </div>
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
-      <button onclick="upvote()" type="button" class="btn btn-success">↑</button>
-      <button onclick="downvote()" type="button" class="btn btn-danger">↓</button>
-      votes: <span id="display"><script type="text/javascript">document.write(votes);</script></span>
-      <!--harusnya display votes pake ini:
-      {{ $question->upvotes - $question->downvotes }}<br>
-      -->
+      <button onclick="downvote()" type="button" class="btn btn-danger float-right mx-1">↓</button>
+      <button onclick="upvote()" type="button" class="btn btn-success float-right mx-1">↑</button>
     </div>
 
     <div class="ml-3 mt-3">
@@ -51,8 +48,8 @@
         </div>
         <div class="card-footer d-inline bg-light">
           <a href="/answerComments/{{$data->id}}" class="badge badge-info float-left ml-3">Komentar</a>
-          <button type="button" class="btn btn-success float-right mx-1">↑</button>
           <button type="button" class="btn btn-danger float-right mx-1">↓</button>
+          <button type="button" class="btn btn-success float-right mx-1">↑</button>          
             <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary float-right mx-1">Best Answer</button>
