@@ -40,6 +40,14 @@ Route::post('/bestanswer/{id}/{question_id}', 'AnswerController@bestanswer');
 
 Route::resource('answers', 'AnswerController');
 
+Route::post('/questionupvote', 'QuestionVoteController@upvote')->name('question.upvote');
+
+Route::post('/questiondownvote', 'QuestionVoteController@downvote')->name('question.downvote');
+
+Route::post('/answerupvote', 'AnswerVoteController@upvote')->name('answer.upvote');
+
+Route::post('/answerdownvote', 'AnswerVoteController@downvote')->name('answer.downvote');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
