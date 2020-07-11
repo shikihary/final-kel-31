@@ -4,8 +4,8 @@
 
 @section('content')
   <div class="ml-3">
-    <h1>Pertanyaan</h1>
-    <a href="/questions/create" class="btn btn-primary mb-2">
+    <h1 class="float-left">Pertanyaan</h1>
+    <a href="/questions/create" class="btn btn-primary mr-3 mt-2 float-right">
       Buat Pertanyaan
     </a>
     <table class="table table-borderless">
@@ -44,7 +44,7 @@
                   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                   <span class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</span>
               </td>
-            <div class="col-6 offset-4" id="test">
+            <div class="col-6 offset-3" id="test">
 
             <td>
             <a href="/questionComments/{{$question->id}}" class="btn btn-sm btn-info">Komentar</a>
