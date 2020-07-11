@@ -30,7 +30,7 @@
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
       @endforeach
-      <h5><br>votes: <span id="display"><script type="text/javascript">document.write(votes);</script></h5>
+      <h5 class="text-secondary"><br>votes: <span id="display"><script type="text/javascript">document.write(votes);</script></h5>
     </div>
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
@@ -60,7 +60,7 @@
           @if($data->is_best_answer == 1)
               <button type="button" class= "btn btn-outline-success float-right mx-1">Verified</button>
             @endif
-            <p class="d-inline">votes: {{ $data->upvotes - $data->downvotes }}<p>
+            <p class="d-inline text-secondary">votes: {{ $data->upvotes - $data->downvotes }}<p>
         </div>
 
     @endforeach
