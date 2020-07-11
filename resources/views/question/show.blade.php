@@ -30,7 +30,7 @@
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
       @endforeach
-      <h5 class="text-secondary"><br>votes: <span id="display"><script type="text/javascript">document.write(votes);</script></h5>
+      <p class="d-inline text-secondary">votes: {{ $question->upvotes - $question->downvotes }}<p>
     </div>
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
@@ -39,8 +39,9 @@
       <!-- PART INI BUAT UPVOTE PERTANYAAN -->
       <form action="{{ route('question.upvote') }}" method="POST">
         @csrf
-        <input type="hidden" id="id" name="id" value="{{ $question->id }}">
+        <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
         <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
         <button type="submit" class="btn btn-success float-right mx-1">↑</button>
       </form>
 

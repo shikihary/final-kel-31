@@ -25,6 +25,7 @@
             -->
             <textarea name="isi" class="form-control my-editor">{!! old('isi', $isi ?? '') !!}</textarea>
           </div>
+          <input type="hidden" id="id" name="id" value="{{ Auth::user()->id }}">
           <div class="form-group">
             <label for="tags">Tags</label>
             <input type="text" class="form-control" id="tags" name="tags" placeholder="tags">
