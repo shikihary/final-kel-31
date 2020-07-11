@@ -1,5 +1,7 @@
 @extends('adminlte.master')
 
+@section('title', 'Forum Developer')
+
 @section('content')
   <div class="ml-3 mt-3">
     <h1>Pertanyaan</h1>

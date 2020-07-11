@@ -1,4 +1,5 @@
 @extends('adminlte.master')
+@section('title', 'Buat Komentar')
 @push('script-head')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 @endpush
@@ -8,7 +9,7 @@
             <div class = "ml-3 pt-2 mb-2">
                 <form action="/answerComments/{{$answer_id}}" method="POST">
                     @csrf
-                    <label for="exampleFormControlTextarea1">Jawab: </label>
+                    <label for="exampleFormControlTextarea1">Komentar: </label>
                     <input type="hidden" id="$answer_id" name="$answer->id" value="{{$answer_id}}">
                     <!-- Text Area Lama
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="isi" rows="3" placeholder="Input Jawaban di sini"></textarea>

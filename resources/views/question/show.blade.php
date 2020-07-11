@@ -1,4 +1,7 @@
 @extends('adminlte.master')
+
+@section('title', $question->judul . ' - Forum Dev')
+
 @push('script-head')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 

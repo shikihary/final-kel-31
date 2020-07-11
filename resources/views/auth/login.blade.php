@@ -1,5 +1,5 @@
 @extends('adminlte.master')
-
+@section('title', 'Login - Forum Developer')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
