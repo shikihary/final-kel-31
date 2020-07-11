@@ -3,7 +3,7 @@
 @section('title', 'Forum Developer')
 
 @section('content')
-  <div class="ml-3 mt-3">
+  <div class="ml-3">
     <h1>Pertanyaan</h1>
     <a href="/questions/create" class="btn btn-primary mb-2">
       Buat Pertanyaan

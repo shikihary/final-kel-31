@@ -22,7 +22,7 @@
 @endpush
 
 @section('content')
-    <div class="ml-3 mt-3">
+    <div class="ml-3">
       <h1> {{ $question->judul }} </h1>
       <p class="text-secondary"> Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }} <br>
       Terakhir diubah pada : {{ date_format($question->updated_at, 'd-m-Y') }} </p>
