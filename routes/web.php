@@ -13,6 +13,8 @@
 
 Route::get('/', 'QuestionController@index');
 Route::get('/users', 'UserController@index');
+Route::get('/tags', 'TagController@index');
+Route::get('/tags/{id}', 'TagController@questionsByTag');
 
 Route::get('/about', function() {
     return view('about');

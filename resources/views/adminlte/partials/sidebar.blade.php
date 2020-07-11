@@ -52,7 +52,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                <a href="{{ url('/tags') }}" class="nav-link">
                   <p>by Tags</p>
                 </a>
               </li>

@@ -10,4 +10,9 @@ class Question_tag extends Model
     protected $fillable = [
         'question_id', 'tag_id',
     ];
+
+    public function question()
+    {
+        return $this->belongsTo('App\Question');
+    }
 }

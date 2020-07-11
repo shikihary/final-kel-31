@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tag;
+use App\Question_tag;
 
 class TagController extends Controller
 {
@@ -13,7 +15,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('tag.index', compact('tags'));
     }
 
     /**
@@ -80,5 +83,15 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function questionsByTag($id)
+    {
+        $questions = Question_tag::where('tag_id', $id)->get();
+        $tag = Tag::find($id);
+        //$tag_name = $tag["tag_name"];
+        //dd($tag_name);
+
+        return view('tag.questionbytag', compact('questions', 'tag'));
     }
 }
