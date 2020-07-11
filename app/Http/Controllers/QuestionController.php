@@ -49,7 +49,7 @@ class QuestionController extends Controller
         $new_question= Question::create([
             "judul" => $request["judul"],
             "isi" => $request["isi"],
-            "user_id" => $id,
+            "user_id" => $request["id"],
         ]);
 
         //dd($new_question);

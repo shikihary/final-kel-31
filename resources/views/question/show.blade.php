@@ -30,15 +30,31 @@
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
       @endforeach
-      <h5 class="text-secondary"><br>votes: <span id="display"><script type="text/javascript">document.write(votes);</script></h5>
+      <br>
+      <h5 class="d-inline text-secondary float-left mt-1">votes: {{ $question->upvotes - $question->downvotes }}</h5>
     </div>
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
-      <button onclick="downvote()" type="button" class="btn btn-danger float-right mx-1">↓</button>
-      <button onclick="upvote()" type="button" class="btn btn-success float-right mx-1">↑</button>
+      <form action="{{ route('question.downvote') }}" method="POST">
+        @csrf
+        <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
+        <input type="hidden" id="reputation" name="reputation" value="{{ Auth::user()->reputation }}">
+        <button type="submit" class="btn btn-danger float-right mx-1">↓</button>
+      </form>
+
+      <form action="{{ route('question.upvote') }}" method="POST">
+        @csrf
+        <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
+        <button type="submit" class="btn btn-success float-right mx-1">↑</button>
+      </form>
+
     </div>
 
-    <div class="ml-3 mt-3">
+    <div class="ml-3 mt-4">
       <h3> Answers </h3> 
     </div>
     <!-- foreach disini -->
@@ -50,17 +66,36 @@
           </div>
         </div>
         <div class="card-footer d-inline bg-light">
-          <a href="/answerComments/{{$data->id}}" class="badge badge-info float-left ml-3">Komentar</a>
-          <button type="button" class="btn btn-danger float-right mx-1">↓</button>
-          <button type="button" class="btn btn-success float-right mx-1">↑</button>          
+
+          <form action="{{ route('answer.downvote') }}" method="POST">
+            @csrf
+            <input type="hidden" id="answer_id" name="answer_id" value="{{ $data->id }}">
+            <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
+            <input type="hidden" id="reputation" name="reputation" value="{{ Auth::user()->reputation }}">
+            <button type="submit" class="btn btn-danger float-right mx-1">↓</button>
+          </form>
+
+          <form action="{{ route('answer.upvote') }}" method="POST">
+            @csrf
+            <input type="hidden" id="answer_id" name="answer_id" value="{{ $data->id }}">
+            <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
+            <button type="submit" class="btn btn-success float-right mx-1">↑</button>
+          </form>
+
             <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-primary float-right mx-1">Best Answer</button>
+            <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
+            <button type="submit" class="btn btn-primary-outline bg-transparent text-primary float-right mx-1">Best answer!</button>
           </form>
+          <a href="/answerComments/{{$data->id}}" class="btn btn-primary-outline bg-transparent float-right ml-3">🗨</a>
+          <span class="d-inline text-secondary floeat-left ml-3">votes: {{ $data->upvotes - $data->downvotes }}</span>
           @if($data->is_best_answer == 1)
-              <button type="button" class= "btn btn-outline-success float-right mx-1">Verified</button>
-            @endif
-            <p class="d-inline text-secondary">votes: {{ $data->upvotes - $data->downvotes }}<p>
+            <button type="button" class= "btn btn-primary-outline bg-transparent text-success float-right ml-3"><h5>✓</h5></button>
+          @endif
         </div>
 
     @endforeach
@@ -71,9 +106,6 @@
                     @csrf
                     <label for="exampleFormControlTextarea1">Jawab: </label>
                     <input type="hidden" id="$question_id" name="$question_id" value="">
-                    <!-- Text Area Lama
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="isi" rows="3" placeholder="Input Jawaban di sini"></textarea>
-                    -->
                     <textarea name="isi" class="form-control my-editor">{!! old('isi', $isi ?? '') !!}</textarea>
                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                     <input class="btn btn-primary mt-2" type="submit" value="Post Jawaban">

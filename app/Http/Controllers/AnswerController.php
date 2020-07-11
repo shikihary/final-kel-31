@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Answer;
+use App\User;
 
 class AnswerController extends Controller
 {
@@ -57,7 +58,7 @@ class AnswerController extends Controller
         }
     }
 
-    public function bestanswer($id, $question_id){
+    public function bestanswer(Request $request, $id, $question_id){
         $answer = Answer::find($id);
         $answer->is_best_answer = 1;
         $answer->save();
@@ -69,6 +70,11 @@ class AnswerController extends Controller
             $value->is_best_answer = 0;
             $value->save();
         }
+        
+        $user = User::find($request["answer_author_id"]);
+        $user->reputation = $user->reputation + 15;
+        $user->save();
+
         return redirect('questions/'.$question_id);
     }
 
