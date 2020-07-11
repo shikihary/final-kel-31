@@ -47,7 +47,7 @@
             <div class="col-6 offset-3" id="test">
 
             <td>
-            <a href="/questionComments/{{$question->id}}" class="btn btn-sm btn-info">Komentar</a>
+            <a href="/questionComments/{{$question->id}}" class="btn btn-sm">🗨</a>
                 <div class="dropdown btn">
                   <a data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-1x waves-effect"></i></a>
                   <div class="dropdown-menu">
