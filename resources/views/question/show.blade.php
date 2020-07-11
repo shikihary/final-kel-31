@@ -88,6 +88,7 @@
 
             <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
+            <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
             <button type="submit" class="btn btn-primary-outline bg-transparent text-primary float-right mx-1">Best answer!</button>
           </form>
           <a href="/answerComments/{{$data->id}}" class="btn btn-primary-outline bg-transparent float-right ml-3">🗨</a>
