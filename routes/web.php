@@ -40,6 +40,10 @@ Route::post('/bestanswer/{id}/{question_id}', 'AnswerController@bestanswer');
 
 Route::resource('answers', 'AnswerController');
 
+//PART INI BUAT UPVOTE PERTANYAAN//
+//harusnya nanti ke /questions/{question_id}
+Route::post('/questions', 'QuestionController@upvote')->name('question.upvote');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

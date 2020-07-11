@@ -35,7 +35,15 @@
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
       <button onclick="downvote()" type="button" class="btn btn-danger float-right mx-1">↓</button>
-      <button onclick="upvote()" type="button" class="btn btn-success float-right mx-1">↑</button>
+      
+      <!-- PART INI BUAT UPVOTE PERTANYAAN -->
+      <form action="{{ route('question.upvote') }}" method="POST">
+        @csrf
+        <input type="hidden" id="id" name="id" value="{{ $question->id }}">
+        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+        <button type="submit" class="btn btn-success float-right mx-1">↑</button>
+      </form>
+
     </div>
 
     <div class="ml-3 mt-3">

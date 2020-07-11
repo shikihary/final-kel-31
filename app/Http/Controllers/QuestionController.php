@@ -149,4 +149,11 @@ class QuestionController extends Controller
         $user = User::find($user_id);
         return view('question.userquestion', compact('questions', 'user'));
     }
+
+    //PART INI BUAT UPVOTE PERTANYAAN//
+    //fungsi upvote sementara, blm nyambung model
+    public function upvote($id, $user_id)
+    {
+        dd($id, $user_id);
+    }
 }
