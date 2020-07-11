@@ -21,8 +21,8 @@
 @section('content')
     <div class="ml-3 mt-3">
       <h1> {{ $question->judul }} </h1>
-      <p class="text-secondary"> Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }} </p>
-      <p class="text-secondary"> Terakhir diubah pada : {{ date_format($question->updated_at, 'd-m-Y') }} </p>
+      <p class="text-secondary"> Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }} <br>
+      Terakhir diubah pada : {{ date_format($question->updated_at, 'd-m-Y') }} </p>
       <p> {!! $question->isi !!} </p>
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
