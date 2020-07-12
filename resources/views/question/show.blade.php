@@ -32,7 +32,9 @@
       </p>
       <p> {!! $question->isi !!} </p>
       @foreach($question->tags as $tag) 
-        <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
+        <form action="{{ url('/tags/'.$tag->id) }}">
+          <button type="submit" class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
+        </form>    
       @endforeach
       <br>
       <h5 class="d-inline text-secondary float-left mt-1 ml-2">votes: {{ $question->upvotes - $question->downvotes }}</h5>
