@@ -25,7 +25,8 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::all();
-        return view('question.index', compact('questions'));
+        $users = User::all();
+        return view('question.index', compact('questions', 'users'));
     }
 
     /**
@@ -97,7 +98,8 @@ class QuestionController extends Controller
     {
         $question = Question::find($id);
         $answers = Answer::where('question_id', $id)->get();
-        return view('question.show', compact('answers', 'question'));
+        $users = User::all();
+        return view('question.show', compact('answers', 'question', 'users'));
     }
 
     /**

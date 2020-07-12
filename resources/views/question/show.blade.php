@@ -25,7 +25,11 @@
     <div class="ml-3">
       <h1> {{ $question->judul }} </h1>
       <p class="text-secondary"> Tanggal dibuat : {{ date_format($question->created_at, 'd-m-Y') }} <br>
-      Terakhir diubah pada : {{ date_format($question->updated_at, 'd-m-Y') }} </p>
+      Terakhir diubah pada : {{ date_format($question->updated_at, 'd-m-Y') }} <br>
+      @foreach($users->where('id', $question->user_id) as $user)
+        <span class="text-secondary">Ditulis oleh : {{ $user->name }} ({{ $user->reputation }})</span>
+      @endforeach
+      </p>
       <p> {!! $question->isi !!} </p>
       @foreach($question->tags as $tag) 
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
@@ -60,7 +64,15 @@
     <!-- foreach disini -->
     @foreach($answers as $key => $data)
         <div class="mx-3 card">
-          <div class="card-header text-secondary">{{ date_format($data->created_at, 'd-m-Y') }}</div>
+          <div class="card-header text-secondary">
+            Dijawab {{ date_format($data->created_at, 'd-m-Y') }}&nbsp
+            pukul {{ date_format($data->created_at, 'H:i') }}<br>
+            Oleh:&nbsp
+            @foreach($users->where('id', $question->user_id) as $user)
+              <a href="/questions/user/{{ Auth::user()->id }}" class="text-primary">{{ $user->name }}</a>
+              <a class="text-secondary">({{ $user->reputation }})</a>
+            @endforeach          
+          </div>
           <div class="card-body">
             <p> {!! $data->isi !!} </p>
           </div>
