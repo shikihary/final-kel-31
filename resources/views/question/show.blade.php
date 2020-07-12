@@ -70,7 +70,7 @@
             Dijawab {{ date_format($data->created_at, 'd-m-Y') }}&nbsp
             pukul {{ date_format($data->created_at, 'H:i') }}<br>
             Oleh:&nbsp
-            @foreach($users->where('id', $question->user_id) as $user)
+            @foreach($users->where('id', $data->user_id) as $user)
               <a href="/questions/user/{{ Auth::user()->id }}" class="text-primary">{{ $user->name }}</a>
               <a class="text-secondary">({{ $user->reputation }})</a>
             @endforeach          
