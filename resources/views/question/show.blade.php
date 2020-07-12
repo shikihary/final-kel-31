@@ -35,7 +35,7 @@
         <button class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
       @endforeach
       <br>
-      <h5 class="d-inline text-secondary float-left mt-1">votes: {{ $question->upvotes - $question->downvotes }}</h5>
+      <h5 class="d-inline text-secondary float-left mt-1 ml-2">votes: {{ $question->upvotes - $question->downvotes }}</h5>
     </div>
     <div class="content-wrapper d-inline">
       <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
@@ -63,7 +63,7 @@
     </div>
     <!-- foreach disini -->
     @foreach($answers as $key => $data)
-        <div class="mx-3 card">
+        <div class="mx-3 mt-1 card">
           <div class="card-header text-secondary">
             Dijawab {{ date_format($data->created_at, 'd-m-Y') }}&nbsp
             pukul {{ date_format($data->created_at, 'H:i') }}<br>
@@ -98,13 +98,13 @@
             <button type="submit" class="btn btn-success float-right mx-1">↑</button>
           </form>
 
-            <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
+          <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
             <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
             <button type="submit" class="btn btn-primary-outline bg-transparent text-primary float-right mx-1">Best answer!</button>
           </form>
           <a href="/answerComments/{{$data->id}}" class="btn btn-primary-outline bg-transparent float-right ml-3">🗨</a>
-          <span class="d-inline text-secondary floeat-left ml-3">votes: {{ $data->upvotes - $data->downvotes }}</span>
+          <h5 class="d-inline text-secondary float-left ml-4">votes: {{ $data->upvotes - $data->downvotes }}</h5>
           @if($data->is_best_answer == 1)
             <button type="button" class= "btn btn-primary-outline bg-transparent text-success float-right ml-3"><h5>✓</h5></button>
           @endif
