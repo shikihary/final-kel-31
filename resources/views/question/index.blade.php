@@ -45,7 +45,7 @@
                   <span class="text-secondary">Terakhir diubah pada : {{ date_format($question->created_at, 'd-m-Y') }}</span>
                   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                   @foreach($users->where('id', $question->user_id) as $user)
-                    <span class="text-secondary">Ditulis oleh : {{ $user->name }}</span>
+                    <span class="text-secondary">Ditanyakan oleh : {{ $user->name }}</span>
                   @endforeach
               </td>
             <div class="col-6 offset-3" id="test">
