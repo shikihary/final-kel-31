@@ -32,7 +32,7 @@
       </p>
       <p> {!! $question->isi !!} </p>
       @foreach($question->tags as $tag) 
-        <form action="{{ url('/tags/'.$tag->id) }}">
+        <form class="d-inline" action="{{ url('/tags/'.$tag->id) }}">
           <button type="submit" class="btn btn-default btn-sm"> {{$tag->tag_name}} </button>
         </form>    
       @endforeach
