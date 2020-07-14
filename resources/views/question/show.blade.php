@@ -40,23 +40,30 @@
       <h5 class="d-inline text-secondary float-left mt-1 ml-2">votes: {{ $question->upvotes - $question->downvotes }}</h5>
     </div>
     <div class="content-wrapper d-inline">
-      <!--button upvote/downvote sementara: belum diintegrasi fungsi ke database-->
-      <form action="{{ route('question.downvote') }}" method="POST">
-        @csrf
-        <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
-        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-        <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
-        <input type="hidden" id="reputation" name="reputation" value="{{ Auth::user()->reputation }}">
-        <button type="submit" class="btn btn-danger float-right mx-1">↓</button>
-      </form>
+      
+    @guest
+        @if (Auth::check())
+          <form action="{{ route('question.downvote') }}" method="POST">
+            @csrf
+            <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
+            <input type="hidden" id="reputation" name="reputation" value="{{ Auth::user()->reputation }}">
+            <button type="submit" class="btn btn-danger float-right mx-1">↓</button>
+          </form>
 
-      <form action="{{ route('question.upvote') }}" method="POST">
-        @csrf
-        <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
-        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-        <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
-        <button type="submit" class="btn btn-success float-right mx-1">↑</button>
-      </form>
+          <form action="{{ route('question.upvote') }}" method="POST">
+            @csrf
+            <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" id="question_author_id" name="question_author_id" value="{{ $question->user_id }}">
+            <button type="submit" class="btn btn-success float-right mx-1">↑</button>
+          </form>
+        @endif
+      @else
+            <button type="button" class="btn btn-danger float-right mx-1">↓</button>
+            <button type="button" class="btn btn-success float-right mx-1">↑</button>
+      @endguest
 
     </div>
 
@@ -71,7 +78,7 @@
             pukul {{ date_format($data->created_at, 'H:i') }}<br>
             Oleh:&nbsp
             @foreach($users->where('id', $data->user_id) as $user)
-              <a href="/questions/user/{{ Auth::user()->id }}" class="text-primary">{{ $user->name }}</a>
+              <a href="/questions/user/{{ $user->id }}" class="text-primary">{{ $user->name }}</a>
               <a class="text-secondary">({{ $user->reputation }})</a>
             @endforeach          
           </div>
@@ -81,24 +88,31 @@
         </div>
         <div class="card-footer d-inline bg-light">
 
-          <form action="{{ route('answer.downvote') }}" method="POST">
-            @csrf
-            <input type="hidden" id="answer_id" name="answer_id" value="{{ $data->id }}">
-            <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
-            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-            <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
-            <input type="hidden" id="reputation" name="reputation" value="{{ Auth::user()->reputation }}">
-            <button type="submit" class="btn btn-danger float-right mx-1">↓</button>
-          </form>
+      @guest
+        @if (Auth::check())
+            <form action="{{ route('answer.downvote') }}" method="POST">
+              @csrf
+              <input type="hidden" id="answer_id" name="answer_id" value="{{ $data->id }}">
+              <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+              <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+              <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
+              <input type="hidden" id="reputation" name="reputation" value="{{ Auth::user()->reputation }}">
+              <button type="submit" class="btn btn-danger float-right mx-1">↓</button>
+            </form>
 
-          <form action="{{ route('answer.upvote') }}" method="POST">
-            @csrf
-            <input type="hidden" id="answer_id" name="answer_id" value="{{ $data->id }}">
-            <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
-            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-            <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
-            <button type="submit" class="btn btn-success float-right mx-1">↑</button>
-          </form>
+            <form action="{{ route('answer.upvote') }}" method="POST">
+              @csrf
+              <input type="hidden" id="answer_id" name="answer_id" value="{{ $data->id }}">
+              <input type="hidden" id="question_id" name="question_id" value="{{ $question->id }}">
+              <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+              <input type="hidden" id="answer_author_id" name="answer_author_id" value="{{ $data->user_id }}">
+              <button type="submit" class="btn btn-success float-right mx-1">↑</button>
+            </form>
+        @endif
+      @else
+            <button type="button" class="btn btn-danger float-right mx-1">↓</button>
+            <button type="button" class="btn btn-success float-right mx-1">↑</button>
+      @endguest
 
           <form class="d-inline" role="form" action="/bestanswer/{{$data->id}}/{{$data->question_id}}" method="POST">
             @csrf
@@ -116,6 +130,7 @@
 
     <table class="table">
             <div class = "ml-3 pt-2 mb-2">
+              @if (Auth::check())
                 <form action="/questions/{{$question->id}}" method="POST">
                     @csrf
                     <label for="exampleFormControlTextarea1">Jawab: </label>
@@ -124,6 +139,7 @@
                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                     <input class="btn btn-primary mt-2" type="submit" value="Post Jawaban">
                 </form>
+              @endif
             </div>
     </table>
 
